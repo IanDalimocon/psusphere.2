@@ -1,5 +1,5 @@
 {% if is_paginated %}
-<div class="card-footer px-0 border-0 d-flex flex-column flex-lg-row align-item-center jastify-content-between mt-3">
+<div class="card-footer px-0 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between mt-3">
     <nav aria-label="Topics pagination" class="mb-4">
         <ul class="pagination">
             {% if page_obj.number > 1 %}
@@ -10,8 +10,7 @@
             <li class="page-item disabled">
                 <span class="page-link">First</span>
             </li>
-            {% endif %}
-            {% if page_obj.has_previous %}
+            {% endif %} {% if page_obj.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Prev</a>
             </li>
@@ -19,11 +18,12 @@
             <li class="page-item disabled">
                 <span class="page-link">Prev</span>
             </li>
-            {% endif %}
-            {% for page_num in paginator.page_range %}
-            {% if page_obj.number == page_num %}
+            {% endif %} {% for page_num in paginator.page_range %} {% if page_obj.number == page_num %}
             <li class="page-item active">
-                <span class="page-link">{{ page_num }} <span class="sr-only">(current)</span></span>
+                <span class="page-link">
+                    {{ page_num }}
+                    <span class="sr-only">(current)</span>
+                </span>
             </li>
             {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
             <li class="page-item">
@@ -41,7 +41,7 @@
             </li>
             {% endif %}
             {% if page_obj.number != paginator.num_pages %}
-            <li class="page-item"> 
+            <li class="page-item">
                 <a class="page-link" href="?page={{ paginator.num_pages }}">Last</a>
             </li>
             {% else %}
